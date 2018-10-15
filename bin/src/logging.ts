@@ -5,6 +5,9 @@ import relativeId from '../../src/utils/relativeId';
 // log to stderr to keep `rollup main.js > bundle.js` from breaking
 export const stderr = console.error.bind(console); // eslint-disable-line no-console
 
+// log to stdout as an alterantive to logging to stderr
+export const stdout = console.log.bind(console); // eslint-disable-line no-console
+
 export function handleError(err: RollupError, recover = false) {
 	let description = err.message || err;
 	if (err.name) description = `${err.name}: ${description}`;
