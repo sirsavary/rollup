@@ -8,7 +8,7 @@ import {
 	RollupSingleFileBuild
 } from '../../../src/rollup/types';
 import relativeId from '../../../src/utils/relativeId';
-import { handleError, stderr } from '../logging';
+import { handleError, stdout } from '../logging';
 import SOURCEMAPPING_URL from '../sourceMappingUrl';
 import { BatchWarnings } from './batchWarnings';
 import { printTimings } from './timings';
@@ -39,7 +39,7 @@ export default function build(
 				.map(name => (<Record<string, string>>inputOptions.input)[name])
 				.join(', ');
 		}
-		stderr(tc.cyan(`\n${tc.bold(inputFiles)} → ${tc.bold(files.join(', '))}...`));
+		stdout(tc.cyan(`\n${tc.bold(inputFiles)} → ${tc.bold(files.join(', '))}...`));
 	}
 
 	return rollup
@@ -71,7 +71,7 @@ export default function build(
 		.then((bundle?: RollupSingleFileBuild | RollupBuild) => {
 			warnings.flush();
 			if (!silent)
-				stderr(
+				stdout(
 					tc.green(`created ${tc.bold(files.join(', '))} in ${tc.bold(ms(Date.now() - start))}`)
 				);
 			if (bundle && bundle.getTimings) {
